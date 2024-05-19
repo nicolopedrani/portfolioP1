@@ -13,10 +13,10 @@ st.markdown("""
 ## **Pace: Plan**                       
 ### Understand the business scenario and problem
             
-This project analyzes a dataset of employee information from Salifort Motors to identify factors that contribute to employee turnover. 
-            The goal is to use this information to develop strategies to improve employee retention.  If you can predict employees likely to quit, it might be possible to identify factors that contribute to their leaving. Because it is time-consuming and expensive to find, interview, and hire new employees, increasing employee retention will be beneficial to the company.  
+This project analyzes a dataset of employee information from **Salifort Motors** to identify factors that contribute to employee turnover. 
+            The goal is to use this information to develop strategies to improve employee retention.  If we can predict employees likely to quit, it might be possible to identify factors that contribute to their leaving. Because it is time-consuming and expensive to find, interview, and hire new employees, increasing employee retention will be beneficial to the company.  
               
-**Objective**: Your goals in this project are to analyze the data collected by the HR department and to build a model that predicts whether or not an employee will leave the company
+**Objective**: The goals of this project are to analyze the data collected by the HR department and to build a model that predicts whether or not an employee will leave the company
 
 This page will explore key findings from the data analysis, including:
 
@@ -48,18 +48,17 @@ salary|The employee's salary (U.S. dollars)
 """
 ### Reflect on these questions as you complete the plan stage.
 
-*  Who are your stakeholders for this project?
-- What are you trying to solve or accomplish?
-- What are your initial observations when you explore the data?
-- What resources do you find yourself using as you complete this stage? (Make sure to include the links.)
-- Do you have any ethical considerations in this stage?
+- Who are the stakeholders for this project?
+- What are we trying to solve or accomplish?
+- What are our initial observations when we explore the data?
+- Do we have any ethical considerations in this stage?
 """
 
 # Data Exploration Section
 st.header("Explorative Data Analysis (EDA)")
 st.markdown('''
-- Understand your variables
-- Clean your dataset (missing data, redundant data, outliers)
+- Understand variables
+- Clean our dataset (missing data, redundant data, outliers)
             
 As a data cleaning step, rename the columns as needed. Standardize the column names so that they are all in _snake\_case_, correct any column names that are misspelled, and make column names more concise as needed.
             
@@ -108,7 +107,7 @@ st.write(df0.isna().sum())
 st.code('''df0.duplicated().sum()''')
 st.write(df0.duplicated().sum())
 '''3,008 rows contain duplicates. That is 20% of the data.  
-How likely is it that these are legitimate entries? In other words, how plausible is it that two employees self-reported the exact same response for every column?  
+How likely is it that these are legitimate entries? In other words, how plausible is it that two employees self-reported the exact same response for every column?
 With several continuous variables across 10 columns, it seems very unlikely that these observations are legitimate. You can proceed by dropping them.
 '''
 df1 = df0.drop_duplicates(keep='first')
@@ -159,7 +158,7 @@ outliers = df1[(df1['tenure'] > upper_limit) | (df1['tenure'] < lower_limit)]
 # Count how many rows in the data contain outliers in `tenure`
 st.write(f"Number of rows in the data containing outliers in `tenure`: {len(outliers)}")
 '''
-Certain types of models are more sensitive to outliers than others. When you get to the stage of building your model, consider whether to remove these outliers based on the type of model you decide to use.
+Certain types of models are more sensitive to outliers than others. When we get to the stage of building our model, we must consider whether to remove these outliers based on the type of model we decide to use.
 '''
 
 

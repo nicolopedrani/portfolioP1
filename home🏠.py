@@ -21,12 +21,14 @@ load_dataset()
 st.title("Employee Turnover Analysis at Salifort Motors")
 
 st.markdown("""
-This web application utilizes the PACE Workflow, a structured approach designed to efficiently manage projects. PACE stands for:
+The following portfolio project is based on PACE Workflow, a structured approach designed to efficiently manage projects.   
+PACE stands for:
 
 1. **Plan**: This stage involves defining project goals, scope, and resources. It's crucial to identify stakeholders, gather requirements, and establish clear deliverables.
 2. **Analyze**: Here, we delve deeper into the project. Data is analyzed to understand trends, identify potential challenges, and inform decision-making.
 3. **Construct**: This is the building phase. Based on the plan and analysis, we develop the project components, whether it's a data pipeline, a machine learning model, or a web application like this one.
-4. **Execute**: Finally, the project is deployed and launched. This stage involves monitoring performance, addressing issues, and iterating based on feedback.
+4. **Execute**: Finally, the project is deployed and launched. This stage involves monitoring performance, addressing issues, and iterating based on feedback.  
+            
 The PACE Workflow is iterative, meaning you can revisit any stage as needed throughout the project lifecycle. This flexibility allows for course correction and ensures the project remains aligned with its goals.
 
 ### Benefits of using PACE Workflow:
@@ -35,7 +37,7 @@ The PACE Workflow is iterative, meaning you can revisit any stage as needed thro
 * Improved Communication: Clear communication between stakeholders is fostered by defining goals and expectations upfront.
 * Reduced Risk: Potential issues are identified early through analysis, enabling proactive mitigation strategies.
 * Enhanced Project Success: The PACE Workflow provides a roadmap for project execution, increasing the likelihood of achieving desired outcomes.
-This web application leverages the PACE Workflow to guide you through your project.  Let's get started!
+This portfolio project leverages the PACE Workflow to guide you through your project.  Let's get started!
             """)
 
 col1, col2, col3 = st.columns(3)

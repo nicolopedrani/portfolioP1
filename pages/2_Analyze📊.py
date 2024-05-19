@@ -15,23 +15,20 @@ df1 = st.session_state['df0'].drop_duplicates(keep='first')
 
 """
 # pAce: Analyze Stage
-- Perform EDA (analyze relationships between variables)
+- Perform EDA (Explorative Data Analysis, analyze relationships between variables)
 """
 
 """
-💭
-### Reflect on these questions as you complete the analyze stage.
+### Reflect 💭 on these questions in the analyze stage.
 
-- What did you observe about the relationships between variables?
-- What do you observe about the distributions in the data?
-- What transformations did you make with your data? Why did you chose to make those decisions?
+- What do we observe about the relationships between variables?
+- What do we observe about the distributions in the data?
+- What transformations do we make with our data? Why do we chose to make those decisions?
 - What are some purposes of EDA before constructing a predictive model?
-- What resources do you find yourself using as you complete this stage? (Make sure to include the links.)
-- Do you have any ethical considerations in this stage?
 """
 
 st.subheader('Analyze Relationships between Variables')
-'''Begin by understanding how many employees left and what percentage of all employees this figure represents'''
+'''We begin by understanding how many employees left and what percentage of all employees this figure represents'''
 
 color_stay = 'skyblue'
 color_left = 'salmon'
@@ -59,10 +56,10 @@ fig3.update_layout(
 st.plotly_chart(fig3)
 
 """
-Now, examine variables that you're interested in, and create plots to visualize relationships between variables in the data.
+Now, examine variables that we're interested in, and create plots to visualize relationships between variables in the data.
 
-You could start by creating a stacked boxplot showing `average_monthly_hours` distributions for `number_project`, comparing the distributions of employees who stayed versus those who left.  
-Box plots are very useful in visualizing distributions within data, but they can be deceiving without the context of how big the sample sizes that they represent are. So, you could also plot a stacked histogram to visualize the distribution of `number_project` for those who stayed and those who left.
+We could start by creating a stacked boxplot showing `average_monthly_hours` distributions for `number_project`, comparing the distributions of employees who stayed versus those who left.  
+Box plots are very useful in visualizing distributions within data, but they can be deceiving without the context of how big the sample sizes that they represent are. So, we could also plot a stacked histogram to visualize the distribution of `number_project` for those who stayed and those who left.
 """
 
 # Define color scheme and legend titles
@@ -116,7 +113,11 @@ st.plotly_chart(fig2)
 """
 It might be natural that people who work on more projects would also work longer hours. This appears to be the case here, with the mean hours of each group (stayed and left) increasing with number of projects worked. However, a few things stand out from this plot.
 
-1. There are two groups of employees who left the company: (A) those who worked considerably less than their peers with the same number of projects, and (B) those who worked much more. Of those in group A, it's possible that they were fired. It's also possible that this group includes employees who had already given their notice and were assigned fewer hours because they were already on their way out the door. For those in group B, it's reasonable to infer that they probably quit. The folks in group B likely contributed a lot to the projects they worked in; they might have been the largest contributors to their projects.
+1. There are two groups of employees who left the company: 
+    * (A) those who worked considerably less than their peers with the same number of projects, 
+    * and (B) those who worked much more.  
+    
+Of those in group A, it's possible that they were fired. It's also possible that this group includes employees who had already given their notice and were assigned fewer hours because they were already on their way out the door. For those in group B, it's reasonable to infer that they probably quit. The folks in group B likely contributed a lot to the projects they worked in; they might have been the largest contributors to their projects.
 
 2. Everyone with seven projects left the company, and the interquartile ranges of this group and those who left with six projects was ~255&ndash;295 hours/month&mdash;much more than any other group.
 
@@ -178,8 +179,6 @@ The scatterplot above shows that there was a sizeable group of employees who wor
 The plot also shows another group of people who left, those who had more normal working hours. Even so, their satisfaction was only around 0.4. It's difficult to speculate about why they might have left. It's possible they felt pressured to work more, considering so many of their peers worked more. And that pressure could have lowered their satisfaction levels.
 
 Finally, there is a group who worked ~210&ndash;280 hours per month, and they had satisfaction levels ranging ~0.7&ndash;0.9.
-
-Note the strange shape of the distributions here. This is indicative of data manipulation or synthetic data.
 """
 
 # Define color scheme and legend titles
@@ -230,14 +229,14 @@ st.plotly_chart(fig5)
 st.plotly_chart(fig6)
 
 """
-There are many observations you could make from this plot.
+
 - Employees who left fall into two general categories: dissatisfied employees with shorter tenures and very satisfied employees with medium-length tenures.
 - Four-year employees who left seem to have an unusually low satisfaction level. It's worth investigating changes to company policy that might have affected people specifically at the four-year mark, if possible.
 - The longest-tenured employees didn't leave. Their satisfaction levels aligned with those of newer employees who stayed.
 - The histogram shows that there are relatively few longer-tenured employees. It's possible that they're the higher-ranking, higher-paid employees.
 """
 """
-As the next step in analyzing the data, you could calculate the mean and median satisfaction scores of employees who left and those who didn't.
+As the next step in analyzing the data, we could calculate the mean and median satisfaction scores of employees who left and those who didn't.
 """
 
 # Group by 'left' column and calculate mean and median of 'satisfaction_level'
@@ -294,7 +293,7 @@ As expected, the mean and median satisfaction scores of employees who left are l
 """
 
 """
-Next, you could examine salary levels for different tenures.
+Next, we could examine salary levels for different tenures.
 """
 
 # Define short-tenured employees
@@ -318,7 +317,7 @@ for salary_group in ['low', 'medium', 'high']:
     ))
 
 fig1.update_layout(
-    title_text='Salary histogram by tenure: short-tenured people',
+    title_text='Salary histogram by tenure: short-tenured people, tenure<7',
     xaxis_title='Tenure',
     yaxis_title='Percentage',
     bargap=0.1
@@ -339,7 +338,7 @@ for salary_group in ['low', 'medium', 'high']:
     ))
 
 fig2.update_layout(
-    title_text='Salary histogram by tenure: long-tenured people',
+    title_text='Salary histogram by tenure: long-tenured people, tenure>6',
     xaxis_title='Tenure',
     yaxis_title='Percentage',
     bargap=0.1
@@ -352,7 +351,7 @@ st.plotly_chart(fig2)
 """
 The plots above show that long-tenured employees were not disproportionately comprised of higher-paid employees.
 
-Next, you could explore whether there's a correlation between working long hours and receiving high evaluation scores. You could create a scatterplot of `average_monthly_hours` versus `last_evaluation`.
+Next, we could explore whether there's a correlation between working long hours and receiving high evaluation scores. We could create a scatterplot of `average_monthly_hours` versus `last_evaluation`.
 """
 
 # Create scatter plot
@@ -397,13 +396,13 @@ fig4.update_layout(
 st.plotly_chart(fig4)
 
 """
-The following observations can be made from the scatterplot above:
+
 - The scatterplot indicates two groups of employees who left: overworked employees who performed very well and employees who worked slightly under the nominal monthly average of 166.67 hours with lower evaluation scores.
 - There seems to be a correlation between hours worked and evaluation score.
 - There isn't a high percentage of employees in the upper left quadrant of this plot; but working long hours doesn't guarantee a good evaluation score.
 - Most of the employees in this company work well over 167 hours per month.
 
-Next, you could examine whether employees who worked very long hours were promoted in the last five years.
+Next, we could examine whether employees who worked very long hours were promoted in the last five years.
 """
 
 # Create scatter plot
@@ -414,7 +413,7 @@ fig4.add_trace(go.Scatter(
     y=df1[df1['left'] == 1]['promotion_last_5years'],
     mode='markers',
     marker=dict(color=color_left),
-    name='Left'
+    name='Left',
 ))
 
 # Add scatter plot traces
@@ -422,7 +421,7 @@ fig4.add_trace(go.Scatter(
     x=df1[df1['left'] == 0]['average_monthly_hours'],
     y=df1[df1['left'] == 0]['promotion_last_5years'],
     mode='markers',
-    marker=dict(color=color_stay),
+    marker=dict(color=color_stay, opacity=0.3),
     name='Stay'
 ))
 
@@ -448,12 +447,12 @@ fig4.update_layout(
 st.plotly_chart(fig4)
 
 """
-The plot above shows the following:
+
 - very few employees who were promoted in the last five years left
 - very few employees who worked the most hours were promoted
 - all of the employees who left were working the longest hours  
 
-Next, you could inspect how the employees who left are distributed across departments.
+Next, we could inspect how the employees who left are distributed across departments.
 """
 
 fig = go.Figure()
@@ -482,7 +481,7 @@ st.plotly_chart(fig)
 """
 There doesn't seem to be any department that differs significantly in its proportion of employees who left to those who stayed.
 
-Lastly, you could check for strong correlations between variables in the data.
+Lastly, we could check for strong correlations between variables in the data.
 """
 
 # Calculate correlation matrix
