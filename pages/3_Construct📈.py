@@ -28,11 +28,11 @@ st.title("Employee Turnover Analysis at Salifort Motors")
 df1 = st.session_state['df0'].drop_duplicates(keep='first')
 
 """
-# paCe: Construct Stage 🔎 💭
+# paCe: Construct Stage 🔎 🔨
 - Determine which models are most appropriate
 - Construct the model
 - Confirm model assumptions
-- Evaluate model results to determine how well your model fits the data
+- Evaluate model results to determine how well our model fits the data
 """
 
 """
@@ -44,19 +44,15 @@ df1 = st.session_state['df0'].drop_duplicates(keep='first')
 - Observations are independent of each other
 - No severe multicollinearity among X variables
 - No extreme outliers
-- Linear relationship between each X variable and the logit of the outcome variable
+- Linear relationship between each X variable and the logit, logarithm of the odds ln(p/(1- p)), of the outcome variable
 - Sufficiently large sample size
 
-💭
-### Reflect on these questions as you complete the constructing stage.
+### Reflect on these questions
 
-- Do you notice anything odd?
-- Which independent variables did you choose for the model and why?
+- Which independent variables do we choose for the model and why?
 - Are each of the assumptions met?
-- How well does your model fit the data?
-- Can you improve it? Is there anything you would change about the model?
-- What resources do you find yourself using as you complete this stage? (Make sure to include the links.)
-- Do you have any ethical considerations in this stage?
+- How well does our model fit the data?
+- Can we improve it? Is there anything we would change about the model?
 
 ## Model Building, Results and Evaluation
 - Fit a model that predicts the outcome variable using two or more independent variables
@@ -64,23 +60,18 @@ df1 = st.session_state['df0'].drop_duplicates(keep='first')
 - Evaluate the model
 
 ### Identify the type of prediction task.
-Your goal is to predict whether an employee leaves the company, which is a categorical outcome variable. So this task involves classification. More specifically, this involves binary classification, since the outcome variable `left` can be either 1 (indicating employee left) or 0 (indicating employee didn't leave).
+Our goal is to predict whether an employee leaves the company, which is a categorical outcome variable. So this task involves classification. More specifically, this involves binary classification, since the outcome variable `left` can be either 1 (indicating employee left) or 0 (indicating employee didn't leave).
 
 ### Identify the types of models most appropriate for this task.
-Since the variable you want to predict (whether an employee leaves the company) is categorical, you could either build a Logistic Regression model, or a Tree-based Machine Learning model.
-
-So you could proceed with one of the two following approaches. Or, if you'd like, you could implement both and determine how they compare.
+Since the variable we want to predict (whether an employee leaves the company) is categorical, we could either build a Logistic Regression model, or a Tree-based Machine Learning model.
 
 ### Modeling Approach A: Logistic Regression Model
 
-This approach covers implementation of Logistic Regression.
-
-#### Logistic regression
-Note that binomial logistic regression suits the task because it involves binary classification.
+The binomial logistic regression suits the task because it involves binary classification.
 
 Before splitting the data, encode the non-numeric variables. There are two: `department` and `salary`.
 
-`department` is a categorical variable, which means you can dummy it for modeling.
+`department` is a categorical variable, which means we can dummy it for modeling.
 
 `salary` is categorical too, but it's ordinal. There's a hierarchy to the categories, so it's better not to dummy this column, but rather to convert the levels to numbers, 0&ndash;2.
 
@@ -115,7 +106,7 @@ df_enc['salary'] = (
 df_enc = pd.get_dummies(df_enc, drop_first=False)
 
 """
-Create a heatmap to visualize how correlated variables are. Consider which variables you're interested in examining correlations between.
+Create a heatmap to visualize how correlated variables are. Consider which variables we're interested in examining correlations between.
 """
 
 # Calculate correlation matrix
@@ -159,12 +150,12 @@ df_logreg = df_enc[(df_enc['tenure'] >= lower_limit) & (df_enc['tenure'] <= uppe
 df_logreg = df_enc[(df_enc['tenure'] >= st.session_state['lower_limit']) & (df_enc['tenure'] <= st.session_state['upper_limit'])]
 
 """
-Isolate the outcome variable, which is the variable you want your model to predict.  
-Select the features you want to use in your model. Consider which variables will help you predict the outcome variable, `left`.  
-Split the data into training set and testing set. Don't forget to stratify based on the values in `y`, since the classes are unbalanced.  
-Construct a logistic regression model and fit it to the training dataset.  
-Test the logistic regression model: use the model to make predictions on the test set.  
-Create a confusion matrix to visualize the results of the logistic regression model.
+- Isolate the outcome variable, which is the variable we want our model to predict.  
+- Select the features we want to use in our model. Consider which variables will help we predict the outcome variable, `left`.  
+- Split the data into training set and testing set.  
+- Construct a logistic regression model and fit it to the training dataset.  
+- Test the logistic regression model: use the model to make predictions on the test set.  
+- Create a confusion matrix to visualize the results of the logistic regression model.
 """
 
 # Isolate the outcome variable
@@ -219,11 +210,8 @@ A perfect model would yield all true negatives and true positives, and no false 
 """
 
 """
-Create a classification report that includes precision, recall, f1-score, and accuracy metrics to evaluate the performance of the logistic regression model.  
-Check the class balance in the data. In other words, check the value counts in the `left` column. Since this is a binary classification task, the class balance informs the way you interpret accuracy metrics.
+Check the class balance in the data, the class balance informs the way you interpret accuracy metrics, and create a classification report that includes precision, recall, f1-score, and accuracy metrics to evaluate the performance of the logistic regression model.  
 """
-
-
 
 color_stay = 'skyblue'
 color_left = 'salmon'
@@ -251,7 +239,7 @@ fig3.update_layout(
 st.plotly_chart(fig3)
 
 """
-There is an approximately 83%-17% split. So the data is not perfectly balanced, but it is not too imbalanced. If it was more severely imbalanced, you might want to resample the data to make it more balanced. In this case, you can use this data without modifying the class balance and continue evaluating the model.
+There is an approximately 83%-17% split. So the data is not perfectly balanced, but it is not too imbalanced. If it was more severely imbalanced, we might want to resample the data to make it more balanced.
 """
 
 # Create classification report for logistic regression model
@@ -274,7 +262,6 @@ The classification report above shows that the logistic regression model achieve
 """
 """
 ### Modeling Approach B: Tree-based Model
-This approach covers implementation of Decision Tree and Random Forest.
 """
 
 # Isolate the outcome variable
@@ -367,7 +354,7 @@ st.dataframe(tree1_cv_results)
 """
 All of these scores from the decision tree model are strong indicators of good model performance.
 
-Recall that decision trees can be vulnerable to overfitting, and random forests avoid overfitting by incorporating multiple trees to make predictions. You could construct a random forest model next.
+Recall that decision trees can be vulnerable to overfitting, and random forests avoid overfitting by incorporating multiple trees to make predictions. We could construct a random forest model next.
 """
 
 """
@@ -477,7 +464,7 @@ st.dataframe(pd.concat([tree1_cv_results,rf1_cv_results]))
 """
 The evaluation scores of the random forest model are better than those of the decision tree model, with the exception of recall (the recall score of the random forest model is approximately 0.001 lower, which is a negligible amount). This indicates that the random forest model mostly outperforms the decision tree model.
 
-Next, you can evaluate the final model on the test set.
+Next, we can evaluate the final model on the test set.
 """
 
 # Get predictions on test data
@@ -485,19 +472,19 @@ rf1_test_scores = get_scores('random forest1 test', rf1, X_test, y_test)
 st.dataframe(rf1_test_scores)
 
 """
-The test scores are very similar to the validation scores, which is good. This appears to be a strong model. Since this test set was only used for this model, you can be more confident that your model's performance on this data is representative of how it will perform on new, unseeen data.
+The test scores are very similar to the validation scores, which is good. This appears to be a strong model. Since this test set was only used for this model, we can be more confident that our model's performance on this data is representative of how it will perform on new, unseeen data.
 """
 
 """
 #### Feature Engineering
 
-You might be skeptical of the high evaluation scores. There is a chance that there is some data leakage occurring. Data leakage is when you use data to train your model that should not be used during training, either because it appears in the test data or because it's not data that you'd expect to have when the model is actually deployed. Training a model with leaked data can give an unrealistic score that is not replicated in production.
+There is a chance that there is some data leakage occurring. Data leakage is when you use data to train your model that should not be used during training, either because it appears in the test data or because it's not data that you'd expect to have when the model is actually deployed. Training a model with leaked data can give an unrealistic score that is not replicated in production.
 
 In this case, it's likely that the company won't have satisfaction levels reported for all of its employees. It's also possible that the `average_monthly_hours` column is a source of some data leakage. If employees have already decided upon quitting, or have already been identified by management as people to be fired, they may be working fewer hours.
 
 The first round of decision tree and random forest models included all variables as features. This next round will incorporate feature engineering to build improved models.
 
-You could proceed by dropping `satisfaction_level` and creating a new feature that roughly captures whether an employee is overworked. You could call this new feature `overworked`. It will be a binary variable.
+We could proceed by dropping `satisfaction_level` and creating a new feature that roughly captures whether an employee is overworked. We could call this new feature `overworked`. It will be a binary variable.
 """
 
 # Drop `satisfaction_level` and save resulting dataframe in new variable
@@ -509,9 +496,9 @@ df2['overworked'] = df2['average_monthly_hours']
 """
 166.67 is approximately the average number of monthly hours for someone who works 50 weeks per year, 5 days per week, 8 hours per day.
 
-You could define being overworked as working more than 175 hours per month on average.
+We could define being overworked as working more than 175 hours per month on average.
 
-To make the `overworked` column binary, you could reassign the column using a boolean mask.
+To make the `overworked` column binary, we could reassign the column using a boolean mask.
 - `df2['overworked'] > 175` creates a series of booleans, consisting of `True` for every value > 175 and `False` for every values ≤ 175
 - `.astype(int)` converts all `True` to `1` and all `False` to `0`
 """

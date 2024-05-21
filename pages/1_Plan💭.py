@@ -46,7 +46,7 @@ salary|The employee's salary (U.S. dollars)
 """
 
 """
-### Reflect on these questions as you complete the plan stage.
+### Reflect on these questions
 
 - Who are the stakeholders for this project?
 - What are we trying to solve or accomplish?
