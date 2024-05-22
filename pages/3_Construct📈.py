@@ -143,6 +143,13 @@ st.plotly_chart(fig)
 Since logistic regression is quite sensitive to outliers, it would be a good idea at this stage to remove the outliers in the `tenure` column that were identified earlier.
 """
 
+if 'upper_limit' not in st.session_state:
+      cols = st.columns([1,3,1])
+      with cols[1]:
+        st.write("### Go first to the Plan page before continue")
+        st.page_link("pages/1_Plan💭.py", label="Plan", icon="💭")
+        st.stop()
+
 st.code('''
 df_logreg = df_enc[(df_enc['tenure'] >= lower_limit) & (df_enc['tenure'] <= upper_limit)]
         ''')
@@ -617,8 +624,7 @@ rf2_cv_results = make_results('random forest2 cv', rf2, 'auc')
 st.dataframe(pd.concat([tree1_cv_results,tree2_cv_results,rf1_cv_results, rf2_cv_results]))
 
 """
-Again, the scores dropped slightly, but the random forest performs better than the decision tree if using AUC as the deciding metric.
-
+Again, the scores dropped slightly, but the random forest performs better than the decision tree if using AUC as the deciding metric.  
 Score the champion model on the test set now.
 """
 
@@ -627,8 +633,7 @@ rf2_test_scores = get_scores('random forest2 test', rf2, X_test, y_test)
 st.dataframe(pd.concat([rf1_test_scores,rf2_test_scores]))
 
 """
-This seems to be a stable, well-performing final model.
-
+This seems to be a stable, well-performing final model.  
 Plot a confusion matrix to visualize how well it predicts on the test set.
 """
 
@@ -650,15 +655,12 @@ ax.set_ylabel('True Label')
 st.pyplot(fig, use_container_width=False, dpi=100)
 
 """
-The model predicts more false positives than false negatives, which means that some employees may be identified as at risk of quitting or getting fired, when that's actually not the case. But this is still a strong model.
-
-For exploratory purpose, you might want to inspect the most important features in the random forest model.
+The model predicts more false positives than false negatives, which means that some employees may be identified as at risk of quitting or getting fired, when that's actually not the case. But this is still a strong model.  
+For exploratory purpose, we want to inspect the most important features in the models.
 """
 
 """
 #### Decision tree feature importance
-
-You can also get feature importance from decision trees
 """
 
 #tree2_importances = pd.DataFrame(tree2.best_estimator_.feature_importances_, columns=X.columns)
@@ -675,7 +677,6 @@ tree2_importances
 
 st.bar_chart(tree2_importances)
 
-
 if 'tree2_importances' not in st.session_state:
         st.session_state['tree2_importances'] = tree2_importances
 
@@ -685,8 +686,6 @@ The barplot above shows that in this decision tree model, `last_evaluation`, `nu
 
 """
 #### Random forest feature importance
-
-Now, plot the feature importances for the random forest model.
 """
 
 # Get feature importances
